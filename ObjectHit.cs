@@ -5,6 +5,9 @@ using UnityEngine;
 public class ObjectHit : MonoBehaviour
 {
 
+
+// This code script will cause a material color change on collision.
+
     private void OnCollisionEnter(Collision other) 
     {
         if(other.gameObject.tag == "Player")
