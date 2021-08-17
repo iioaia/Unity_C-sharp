@@ -56,7 +56,7 @@ public class CollisionHandler : MonoBehaviour
     {
 
 
-        if (isTransitioning || collisionDisabled ) {return;}   // if it is transitioning OR collisions are disabled, return, meaning, DO nothing below.
+        if (isTransitioning || collisionDisabled ) {return;}   // if game object is transitioning OR collisions are disabled, return, meaning, DO nothing below.
     
         
 
@@ -64,10 +64,9 @@ public class CollisionHandler : MonoBehaviour
         switch(other.gameObject.tag)
         {
             case "Friendly":
-                
+                 // Placeholder, not used at the moment.
                 break;
             case "Finish":
-
                 SuccessLoadNextScene();
                 break;
             case "Fuel":
@@ -118,7 +117,7 @@ public class CollisionHandler : MonoBehaviour
 
 
 
-    void LoadNextScene() // Loads next scene in the build settings order, 0,1,2,3,4 etc.
+    void LoadNextScene() // Loads next scene in the build order upon a successful landing.
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex; // gets the active scene
         int nextSceneIndex = currentSceneIndex + 1;                       // Variable that will Add 1 to the active scene number  eg:  scene 0 + 1 = scene 1
