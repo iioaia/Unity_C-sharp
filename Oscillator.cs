@@ -31,7 +31,7 @@ public class Oscillator : MonoBehaviour
         if (period <= Mathf.Epsilon) {return;}
         float cycles = Time.time / period; // continually growing over time
 
-        const float tau = Mathf.PI * 2;  //   constant value. Mathf for games course recommended. Gamedev.TV
+        const float tau = Mathf.PI * 2;  //   constant value.
         float rawSineWave = Mathf.Sin(cycles * tau);  // going from -1 to 1
 
         movementFactor = (rawSineWave + 1f) / 2f; // recalculate to go from 0 to 1. cleaner easier to understand
