@@ -21,7 +21,7 @@ public class RocketMovement : MonoBehaviour
    
 
 
-    // Start is called before the first frame update
+ 
     void Start()
     {
        rb = GetComponent<Rigidbody>();
@@ -29,7 +29,7 @@ public class RocketMovement : MonoBehaviour
     }
 
 
-    // Update is called once per frame
+
     void Update()
     {
         ProcessThrust();
@@ -38,7 +38,7 @@ public class RocketMovement : MonoBehaviour
     }
 
 
-
+// This will propel the rocket and play the sound of a thruster.
     void ProcessThrust()
     {
         if (Input.GetKey(KeyCode.Space))
@@ -72,6 +72,7 @@ public class RocketMovement : MonoBehaviour
     }
 
 
+// Enables the rocket to rotate.
 
     void ProcessRotation()
     {
