@@ -3,17 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OscillatorWAIT : MonoBehaviour
+public class OscillatorTrigger : MonoBehaviour
 {
  
- // This script will Enable the Allowed to Move  variable within the Oscillator script to true.  Allowing movement of the specified Oscillator platform.
- // It can also be used as an activator switch. 
- // Attach this script to your activator (trigger) object.  Assign the Oscillator object in the inspector.
- // Attach the Oscillator script to your moving, oscillating platform or object.  Assign it an activator (trigger) object in the inspector.
+ // This script will trigger the variable (Allowed to Move) within the Oscillator script to true. Allowing movement of the Oscillator object.
+ // Attach this script to your  'Oscillator Trigger' object.  This will be your trigger or switch activator object.
+ // In the Inspector for this object, find the  'Oscillating Object'  field  and  Assign your Oscillating object.
+
+ // Attach the Oscillator script to your oscillating platform or object. 
+
+
 
 
 
     public Oscillator OscillatingObject;
+
+
+
 
     void OnTriggerEnter(Collider other)
     {
@@ -31,7 +37,6 @@ public class OscillatorWAIT : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Player"))
         {
-            // To stop Oscillation when Player exits the Trigger, remove the  // only the next line
             //allowedToMove = false;   
             return;
         }
