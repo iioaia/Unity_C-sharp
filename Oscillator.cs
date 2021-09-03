@@ -5,16 +5,22 @@ using UnityEngine;
 public class Oscillator : MonoBehaviour
 {
 
-    // Script will oscillate a platform along the X, Y or Z axis.  By default, Allowed to Move is false. Enable in Inspector to allow movement on Update.
+    // Script will oscillate an object along the X, Y or Z axis.  
 
-    // Can use the OscillatorTrigger script on a different object if you wish to enable Oscillation when another object is Triggered.
+    // Attach this script to your Oscillating object.
+    // In this object's Inspector: 
+    ///   By default, 'Allowed To Move'  is false. 
+    //     Enable 'Allowed To Move' in the Inspector to allow movement without Trigger.  
+    ///     Find the field  'Oscillator Trigger'  and assign the appropriate Oscillator Trigger for this object.
+
+
 
 
 
     Vector3 startPosition;
-    [SerializeField] Vector3 movementVector;
+    [SerializeField] Vector3 movementVector;  // X = left/right,    Y = up/down,   Z = depth in/out   Higher = Farther out before returning
     [SerializeField] [Range (0,1)] float movementFactor;
-    [SerializeField] float period = 2f;
+    [SerializeField] float period = 2f;  // The higher this is  the slower it will move
     
     public bool allowedToMove = false;
     public GameObject oscillatorTrigger;  // Used only if an Oscillator Trigger object is used.
@@ -51,7 +57,7 @@ public class Oscillator : MonoBehaviour
     {
         float cycles = Time.time / period; // continually growing over time
 
-        const float tau = Mathf.PI * 2;  //   constant value. Mathf for games course recommended. Gamedev.TV
+        const float tau = Mathf.PI * 2;  //   constant value.
         float rawSineWave = Mathf.Sin(cycles * tau);  // going from -1 to 1
 
         movementFactor = (rawSineWave + 1f) / 2f; // recalculate to go from 0 to 1. cleaner easier to understand
