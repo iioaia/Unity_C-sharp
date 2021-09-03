@@ -31,6 +31,7 @@ public class OscillatorWAIT : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Player"))
         {
+            // To stop Oscillation when Player exits the Trigger, remove the  // only the next line
             //allowedToMove = false;   
             return;
         }
