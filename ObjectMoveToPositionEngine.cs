@@ -15,7 +15,7 @@ public class ObjectMoveToPositionEngine : MonoBehaviour
 // In the Inspector for the Moving Object:
 //  Find the 'Positions' field, click + once.   
 //   Assign the  'Position'  object.
-//     Assign the Player object also. Ensure Player is has the Player Tag.
+//     Assign the Player object. Ensure Player has the Player Tag.
 // Place an empty game object in the Scene and attach the ObjectMovementTrigger script to it. Suggested to use 1 Position per Moving Object.
 
 
