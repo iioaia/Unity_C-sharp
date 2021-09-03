@@ -6,12 +6,12 @@ using UnityEngine;
 public class WaypointEngine : MonoBehaviour
 {
 
-/// <summary>  
+
 // Attach this scrip to your Moving platform / object.
 // Place empty game objects in the Scene view as your waypoints.
 // In the inspector, assign the Waypoints, Player and Start End anchor.
-// Ensure Player is has the Player Tag.
- ///</summary>
+// You must set the Player  tag  as:  Player.
+
 
 
     public GameObject[] wayPoints;    // List of Waypoints
