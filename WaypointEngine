@@ -1,0 +1,9 @@
+// Attach WaypointEngine to the platform object.
+// Place empty game objects as your waypoints.
+// In the inspector, assign Waypoints, Player and Start End anchor.
+
+// First, setup an array for the waypoints.
+// This allows you to assign empty objects as waypoints.
+ 
+public GameObject[] waypoints; 
+
