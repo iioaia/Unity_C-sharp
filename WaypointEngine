@@ -1,9 +1,89 @@
-// Attach WaypointEngine to the platform object.
-// Place empty game objects as your waypoints.
-// In the inspector, assign Waypoints, Player and Start End anchor.
+using System.IO;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-// First, setup an array for the waypoints.
-// This allows you to assign empty objects as waypoints.
- 
-public GameObject[] waypoints; 
+public class WaypointEngine : MonoBehaviour
+{
+
+/// <summary>  
+// Attach this scrip to your Moving platform / object.
+// Place empty game objects in the Scene view as your waypoints.
+// In the inspector, assign the Waypoints, Player and Start End anchor.
+// Ensure Player is has the Player Tag.
+ ///</summary>
+
+
+    public GameObject[] wayPoints;    // List of Waypoints
+    public GameObject player;       
+    public GameObject platformStartEnd;  // Start and End point of platform movement loop. 
+    int currentWaypoint = 0;
+    public float PlatformMovementSpeed;
+    [SerializeField] float WaypointRadius = 1;  // Buffer around warpoint to avoid warping and surpassing the point.
+    bool playerStayTriggered = false;        // Has the StayTrigger been activated by the Player.  False on Trigger Exit. This prevents non player objects from triggering movement.
+  
+
+
+    
+    void Update()
+    {
+        ReturnToStartEnd();   
+    }
+    
+
+    
+    void OnTriggerStay(Collider other)
+    {   
+        if (other.gameObject.CompareTag("Player"))
+        {
+           playerStayTriggered = true;
+           PlatformMoveToPoint();
+        } 
+        
+        
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        playerStayTriggered = false;
+    }
+    
+
+
+
+    void PlatformMoveToPoint()
+    {
+    
+            // if the Distance between the current waypoint and the target waypoint is less than 1 or Radius, the currentWaypoint will increase by 1.
+        if (Vector3.Distance(wayPoints[currentWaypoint].transform.position, transform.position) < WaypointRadius)
+        {
+            currentWaypoint++;
+
+            if (currentWaypoint >= wayPoints.Length)
+            {
+                currentWaypoint = 0;
+            }
+        }
+
+       
+            // Move the object or platform to the next Waypoint in the list. If 0, return to start end anchor.
+        gameObject.transform.position = Vector3.MoveTowards(transform.position, wayPoints[currentWaypoint].transform.position, Time.deltaTime * PlatformMovementSpeed);
+        
+        
+
+
+    }
+
+
+
+    void ReturnToStartEnd()
+    {
+        if (playerStayTriggered == false)
+        {
+        gameObject.transform.position = Vector3.MoveTowards(transform.position, platformStartEnd.transform.position, Time.deltaTime * PlatformMovementSpeed);  
+        }
+    }
+
+
+}
 
