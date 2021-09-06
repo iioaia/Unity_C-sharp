@@ -1,4 +1,4 @@
-# Unity_C-sharp
+# Unity C-sharp
 Unity 3d Scripts
 
 I've designed these scripts to be functional in any project. Instructions for each script are placed within the scripts.
