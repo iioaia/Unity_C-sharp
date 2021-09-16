@@ -5,11 +5,9 @@ using UnityEngine;
 public class Cannons : MonoBehaviour
 {
 
-
 // UNFINISHED SCRIPT.  This script will follow the target until the target is out of range. Then the cannon will return to it's original rotation. 
 // If the Target comes too close, a projectile will spawn.
 // TODO  Add rigidbody force to projectile towwards the target.
-
 
     [SerializeField] Transform target;
     [SerializeField] float targetRange;
@@ -17,12 +15,15 @@ public class Cannons : MonoBehaviour
     [SerializeField] Rigidbody cannonBall;
     [SerializeField] float rotationSpeed;
     [SerializeField] Transform ballSpawnPosition;
+    [SerializeField] private float waitTimer;
+    float timer;
+
+    bool isAllowedToFire = true;
 
     public Vector3 origin;
     public Quaternion originalRotation;
     Vector3 cannonBallSpawnPosition;
     
-    bool atOrigin = true;
 
     float distanceToTarget = Mathf.Infinity;
 
@@ -30,19 +31,17 @@ public class Cannons : MonoBehaviour
     void Awake()
     {
         origin = gameObject.transform.position;
-        originalRotation = gameObject.transform.rotation;
-        
-
-    
+        originalRotation = gameObject.transform.rotation;    
     }
 
 
     void Update()
     {
-
-       distanceToTarget = Vector3.Distance(target.position, transform.position); 
-       AimCannonToTarget();
-       LaunchCannonBall();
+        timer += Time.deltaTime;
+        distanceToTarget = Vector3.Distance(target.position, transform.position); 
+        AimCannonToTarget();
+        IsAllowedToFire();
+        LaunchCannonBall();
     }
 
 
@@ -54,31 +53,51 @@ public class Cannons : MonoBehaviour
             Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, direction.y, direction.z));
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed); 
         }
-
 // This needs adjusting for future performance. When this part is run it generates a debug console until the Transform Rotation reaches 0,0,0.  
         else if (gameObject.transform.rotation != originalRotation) 
         {
-            Debug.Log("ref");
             Vector3 direction = (origin - transform.position).normalized;
             Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, direction.y, direction.z));
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
         }
-
     }
 
 
     void LaunchCannonBall()
     {
-       
+        if (isAllowedToFire == true)
+        {
+            LauchnProjectileWithinRange();
+        }
 
-            if (distanceToTarget <= attackRange)
-            {
-                Rigidbody cannonBallInstance;
-                cannonBallInstance = Instantiate(cannonBall, ballSpawnPosition.position, ballSpawnPosition.rotation) as Rigidbody;
-                cannonBallInstance.AddForce(ballSpawnPosition.up * 350f);
-            }
-        
     }
+
+
+
+    private void LauchnProjectileWithinRange()
+    {
+        if (distanceToTarget <= attackRange)
+        {
+            Rigidbody cannonBallInstance;
+            cannonBallInstance = Instantiate(cannonBall, ballSpawnPosition.position, ballSpawnPosition.rotation) as Rigidbody;
+            cannonBallInstance.AddForce(ballSpawnPosition.up * 350f);
+            isAllowedToFire = false;
+        }
+    }
+
+
+    void IsAllowedToFire()
+    {
+        if (timer >= waitTimer)
+        {
+            isAllowedToFire = true;
+            timer = 0;
+        }
+    }
+
+
+
+
 
 
 }
