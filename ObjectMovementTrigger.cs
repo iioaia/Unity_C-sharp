@@ -23,6 +23,15 @@ public class ObjectMovementTrigger : MonoBehaviour
         }
     }
 
+    void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))    
+        {
+            ObjectToBeMoved.playerTriggered = false;
+            ObjectToBeMoved.timer = 0f;
+        }
+    }
+
 
 
 
