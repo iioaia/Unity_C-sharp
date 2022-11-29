@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-// Working with the resourceList.cs you can assign a NavMeshAgent to go to specific points in the Scene.
-// This script controls the Bot Movements
+
+// This script controls the Bot Movements. Attach this script  botMovement2.cs  to your bot prefab. 
+// Working with the resourceList.cs you can assign a NavMeshAgent to go to specific points in the Scene. 
+// YOU NEED the resourceList.cs  script attached to an always present game object. Empty GameObject works.
+
 
 
 public class botMovement2 : MonoBehaviour
