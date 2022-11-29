@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-// Working with the botManager.cs you can assign a NavMeshAgent to go to specific points in the Scene.
+// Working with the resourceList.cs you can assign a NavMeshAgent to go to specific points in the Scene.
 // This script controls the Bot Movements
 
 
@@ -23,7 +23,7 @@ public class botMovement2 : MonoBehaviour
 
     int currentPosition = 0;
 
-// You need to attach the botManager.cs  script to an object that will be in always be in your Scene.
+// You need to attach the  resourceList.cs  script to an object that will be in always be in your Scene.
 // On that object you must assign objects in the Resource Objects list. The NavMesh Agent uses those for Vector3 positions
     GameObject[] resourceObjects;
    
